@@ -1,8 +1,52 @@
 <script setup>
-
 import { ref } from 'vue';
-import navbar from '@/components/Navbar.vue';
 
+const resources = [
+  {
+    id: 'registrar-forms',
+    number: '01',
+    title: 'Registrar forms',
+    subtitle: 'Download official documents',
+    href: 'https://cpu.edu.ph/registrars-office-forms/'
+  },
+  {
+    id: 'contact-directory',
+    number: '02',
+    title: 'Contact directory',
+    subtitle: 'Find the right university office',
+    href: 'https://cpu.edu.ph/about-us/phone-directory/'
+  },
+  {
+    id: 'student-services',
+    number: '03',
+    title: 'Student services',
+    subtitle: 'Access your online portal',
+    href: 'https://my.cpu.edu.ph/'
+  },
+  {
+    id: 'visit-cpu',
+    number: '04',
+    title: 'Visit CPU online',
+    subtitle: 'Discover campus life and programs',
+    href: 'https://cpu.edu.ph/'
+  }
+];
+
+const paymentOptions = ['Full payment', '3 installments', '5 installments'];
+const selectedPayment = ref('Full payment');
+
+const feeRows = [
+  { label: 'Tuition Fee (21 units × ₱650)', amount: '₱13,650', muted: false },
+  { label: 'Laboratory Fee (21 units × ₱150)', amount: '₱3,150', muted: false },
+  { label: 'Miscellaneous Fee (8% of tuition)', amount: '₱1,092', muted: false },
+  { label: 'Registration Fee', amount: '₱750', muted: true },
+  { label: 'Library Fee', amount: '₱500', muted: true },
+  { label: 'Athletic Fee', amount: '₱350', muted: true },
+  { label: 'Medical & Dental Fee', amount: '₱400', muted: true },
+  { label: 'Guidance & Testing Fee', amount: '₱300', muted: true },
+  { label: 'ID & Insurance Fee', amount: '₱450', muted: true },
+  { label: 'Student Organization Fee', amount: '₱250', muted: true }
+];
 </script>
 
 <template>
@@ -15,21 +59,16 @@ import navbar from '@/components/Navbar.vue';
 <p class="lead">Everything you need to explore your next step at David Porque.</p>
 
 <div class="hero-resources" aria-label="Admission resources">
-<a href="https://cpu.edu.ph/registrars-office-forms/" target="_blank" rel="noopener noreferrer" class="resource-link">
-<span class="resource-icon">01</span>
-<span><strong>Registrar forms</strong><small>Download official documents</small></span>
-</a>
-<a href="https://cpu.edu.ph/about-us/phone-directory/" target="_blank" rel="noopener noreferrer" class="resource-link">
-<span class="resource-icon">02</span>
-<span><strong>Contact directory</strong><small>Find the right university office</small></span>
-</a>
-<a href="https://my.cpu.edu.ph/" target="_blank" rel="noopener noreferrer" class="resource-link">
-<span class="resource-icon">03</span>
-<span><strong>Student services</strong><small>Access your online portal</small></span>
-</a>
-<a href="https://cpu.edu.ph/" target="_blank" rel="noopener noreferrer" class="resource-link">
-<span class="resource-icon">04</span>
-<span><strong>Visit CPU online</strong><small>Discover campus life and programs</small></span>
+<a
+  v-for="resource in resources"
+  :key="resource.id"
+  :href="resource.href"
+  target="_blank"
+  rel="noopener noreferrer"
+  class="resource-link"
+>
+<span class="resource-icon">{{ resource.number }}</span>
+<span><strong>{{ resource.title }}</strong><small>{{ resource.subtitle }}</small></span>
 </a>
 </div>
 
@@ -100,9 +139,16 @@ the Registrar's Office of CPU.
 <div class="field payment-terms">
 <span>Payment terms</span>
 <div class="button-group">
-<button type="button" class="pill active">Full payment</button>
-<button type="button" class="pill">3 installments</button>
-<button type="button" class="pill">5 installments</button>
+<button
+  v-for="option in paymentOptions"
+  :key="option"
+  type="button"
+  class="pill"
+  :class="{ active: selectedPayment === option }"
+  @click="selectedPayment = option"
+>
+  {{ option }}
+</button>
 </div>
 </div>
 
@@ -116,45 +162,9 @@ the Registrar's Office of CPU.
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>Tuition Fee (21 units × ₱650)</td>
-<td class="align-right">₱13,650</td>
-</tr>
-<tr>
-<td>Laboratory Fee (21 units × ₱150)</td>
-<td class="align-right">₱3,150</td>
-</tr>
-<tr>
-<td>Miscellaneous Fee (8% of tuition)</td>
-<td class="align-right">₱1,092</td>
-</tr>
-<tr class="muted-row">
-<td>Registration Fee</td>
-<td class="align-right">₱750</td>
-</tr>
-<tr class="muted-row">
-<td>Library Fee</td>
-<td class="align-right">₱500</td>
-</tr>
-<tr class="muted-row">
-<td>Athletic Fee</td>
-<td class="align-right">₱350</td>
-</tr>
-<tr class="muted-row">
-<td>Medical & Dental Fee</td>
-<td class="align-right">₱400</td>
-</tr>
-<tr class="muted-row">
-<td>Guidance & Testing Fee</td>
-<td class="align-right">₱300</td>
-</tr>
-<tr class="muted-row">
-<td>ID & Insurance Fee</td>
-<td class="align-right">₱450</td>
-</tr>
-<tr class="muted-row">
-<td>Student Organization Fee</td>
-<td class="align-right">₱250</td>
+<tr v-for="fee in feeRows" :key="fee.label" :class="{ 'muted-row': fee.muted }">
+<td>{{ fee.label }}</td>
+<td class="align-right">{{ fee.amount }}</td>
 </tr>
 </tbody>
 <tfoot>

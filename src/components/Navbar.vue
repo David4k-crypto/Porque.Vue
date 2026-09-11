@@ -12,6 +12,9 @@
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <a href="#" @click.prevent class="nav-link">About</a>
       <RouterLink to="/admission" class="nav-link">Admissions</RouterLink>
+      <RouterLink to="/sample-data" class="nav-link">Sample Data</RouterLink>
+      <RouterLink to="/sample-methods" class="nav-link">Sample Methods</RouterLink>
+      <RouterLink to="/sample-vmodel" class="nav-link">Sample v-model</RouterLink>
       <a href="#" @click.prevent class="nav-link">Academics</a>
       <a href="#" @click.prevent class="nav-link">Campus Life</a>
       <a href="#" @click.prevent class="nav-link">News</a>
