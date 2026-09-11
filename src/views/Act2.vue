@@ -38,7 +38,7 @@
 
     <div class="visual-side">
       <div class="brand-gradient-card">
-        <img src="../assets/CPU_LOGO.png" alt="CPU Seal Badge" class="card-badge-logo" />
+        <img src="../assets/PIG-LOGO.jpg" alt="Pig Logo" class="card-badge-logo" />
         <h3 class="card-brand-title">David Porque</h3>
         <p class="card-brand-subtext">SCIENTIA ET FIDES</p>
         
